@@ -1,6 +1,7 @@
 // App.jsx
 import React, { useState } from 'react';
-import Login from './LoginPage';
+import LoginPage from './LoginPage';
+import MainPage from './MainPage';
 
 const App = () => {
   const [isLoggedIn, setLoggedIn] = useState(false);
@@ -12,12 +13,9 @@ const App = () => {
   return (
     <div>
       {isLoggedIn ? (
-        <div>
-          <h2>Welcome to the Main Page!</h2>
-          {/* Your main page content goes here */}
-        </div>
+        <MainPage />
       ) : (
-        <Login onLogin={handleLogin} />
+        <LoginPage onLogin={handleLogin} />
       )}
     </div>
   );
