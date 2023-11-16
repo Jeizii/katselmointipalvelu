@@ -1,15 +1,15 @@
-// Page1.jsx
+// Page3.jsx
 import React from 'react';
 
-const Page1 = () => {
+const Page3 = () => {
   return (
     <div style={{ textAlign: 'center', marginTop: '50px' }}>
-      <h2>Page 1</h2>
+      <h2>Page 3</h2>
       <p>
-        Tälle sivulle tulee jatkuvakatselmointi
+                Tälle sivulle tulee turvallisuuskatselmointi
       </p>
     </div>
   );
 };
 
-export default Page1;
+export default Page3;

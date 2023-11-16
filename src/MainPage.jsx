@@ -1,5 +1,6 @@
 // MainPage.jsx
 import React from 'react';
+import './MainPage.css';
 
 const MainPage = ({ navigateToPage }) => {
   const handleButtonClick = (page) => {
@@ -9,11 +10,11 @@ const MainPage = ({ navigateToPage }) => {
   return (
     <div style={{ textAlign: 'center', marginTop: '50px' }}>
       <h2>Main Page</h2>
-      <div>
-        <button onClick={() => handleButtonClick('page1')}>Button 1</button>
-        <button onClick={() => handleButtonClick('page2')}>Button 2</button>
-        <button onClick={() => handleButtonClick('page3')}>Button 3</button>
-        <button onClick={() => handleButtonClick('page4')}>Button 4</button>
+      <div className="button-container">
+        <button onClick={() => handleButtonClick('page1')} >Jatkuvakatselmointi</button>
+        <button onClick={() => handleButtonClick('page2')}>Lukukausi- ja vuosikatselmointi</button>
+        <button onClick={() => handleButtonClick('page3')}>Turvallisuuskatselmointi</button>
+        <button onClick={() => handleButtonClick('page4')}>Toimintamalli- ja johtamisenkatselmointi</button>
       </div>
     </div>
   );

@@ -1,0 +1,10 @@
+/* styles.css */
+.button-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.button-container button {
+  margin-bottom: 10px;
+}
