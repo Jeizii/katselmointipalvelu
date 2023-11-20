@@ -6,7 +6,7 @@ const Page1 = () => {
     <div style={{ textAlign: 'center', marginTop: '50px' }}>
       <h2>Page 1</h2>
       <p>
-        Tälle sivulle tulee jatkuvakatselmointi
+                Tälle sivulle tulee turvallisuuskatselmointi
       </p>
     </div>
   );

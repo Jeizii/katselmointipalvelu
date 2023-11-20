@@ -13,34 +13,11 @@ const App = () => {
     setCurrentPage(status ? <MainPage navigateToPage={navigateToPage} /> : null);
   };
 
-  const navigateToPage = (page) => {
-    switch (page) {
-      case 'page1':
-        setCurrentPage(<Page1 navigateToPage={navigateToPage} />);
-        break;
-
-        case 'page2':
-        setCurrentPage(<Page2 navigateToPage={navigateToPage} />);
-        break;
-
-        case 'page3':
-        setCurrentPage(<Page3 navigateToPage={navigateToPage} />);
-        break;
-
-        case 'page4':
-        setCurrentPage(<Page4 navigateToPage={navigateToPage} />);
-        break;
-
-
-      // Add cases for other pages as needed
-      default:
-        setCurrentPage(<MainPage navigateToPage={navigateToPage} />);
-        break;
-    }
-  };
+  
 
   return (
     <div>
+      <h1></h1>
       {isLoggedIn ? (
         currentPage || <MainPage navigateToPage={navigateToPage} />
       ) : (

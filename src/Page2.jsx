@@ -6,7 +6,7 @@ const Page2 = () => {
     <div style={{ textAlign: 'center', marginTop: '50px' }}>
       <h2>Page 2</h2>
       <p>
-              Tälle sivulle tulee Lukukausi- ja vuosikatselmointi
+                Tälle sivulle tulee luku- ja vuosi katselmointi
       </p>
     </div>
   );
