@@ -29,5 +29,8 @@ export async function getLocationById(id) {
         throw new Error("Ympäristön hakeminen epäonnistui syystä x")
     }
 
-    return data
+    // Ottaa indeksin 0 data-arraystä uuteen muuttujaan nimeltä location
+    const [location] = data
+
+    return location
 }
