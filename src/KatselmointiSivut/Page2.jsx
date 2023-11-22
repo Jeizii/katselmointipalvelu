@@ -1,5 +1,5 @@
 // Page2.jsx
-import React from 'react';
+// import React from 'react';
 
 const Page2 = () => {
   return (
