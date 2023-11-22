@@ -1,18 +1,23 @@
 // MainPage.jsx
 import React from 'react';
 import './MainPage';
-import './Page1.jsx';
-import './Page2.jsx';
-import './Page3.jsx';
-import './Page4.jsx';
+import './KatselmointiSivut/Page1.jsx';
+import './KatselmointiSivut/Page2.jsx';
+import './KatselmointiSivut/Page3.jsx';
+import './KatselmointiSivut/Page4.jsx';
 
 const MainPage = () => {
   
 
   return (
     <div style={{ textAlign: 'center', marginTop: '50px' }}>
-      <h2>Main Page</h2>
-      
+      <h1>Etusivu</h1>
+      <h2>Tähän tulee router linkit katlsemointisivuille:</h2>
+        <h3>Jatkuva katselmointi (Henkilökunta ja oppilaat) </h3>
+        <h3>Lukuvuosi- ja vuosikatselmointi (Henkilökunta)</h3>
+        <h3>Turvallisuuskatselmointi (Henkilökunta) </h3>
+        <h3>Toimintamallin ja johtamisen katselmointi (Henkilökunta) </h3>
+        <h4>Raportit (kaikille) </h4>
     </div>
   );
 };

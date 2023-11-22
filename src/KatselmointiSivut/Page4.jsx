@@ -6,7 +6,7 @@ const Page4 = () => {
     <div style={{ textAlign: 'center', marginTop: '50px' }}>
       <h2>Page 4</h2>
       <p>
-        Tälle sivulle tulee toimintamallikatselmointi
+                Tälle sivulle tulee toimintamallikatselmointi
       </p>
     </div>
   );
