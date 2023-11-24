@@ -77,8 +77,10 @@ export default function Root() {
           {/* Jos polku sisältää tekstin "page", piilotetaan allaolevat linkit näkyvistä */}
           {!location.pathname.includes("page") && (
             <>
-              <NavButton to={"/page_1"}>Sivu 1</NavButton>
-              <NavButton to={"/page_2"}>Sivu 2</NavButton>
+              <NavButton to={"/page_1"}>Jakutva katselmointi</NavButton>
+              <NavButton to={"/page_2"}>Luku- ja vuosi katselmointi</NavButton>
+              <NavButton to={"/page_3"}>Turvallisuuskatselmointi</NavButton>
+              <NavButton to={"/page_4"}>Toimintamallin ja johtamisen katselmointi </NavButton>
             </>
           )}
 
