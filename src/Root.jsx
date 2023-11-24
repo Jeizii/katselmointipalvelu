@@ -9,7 +9,7 @@ import styled from "styled-components";
 const Nav = styled.nav`
   display: flex;
   height: 3em;
-  background-color: black;
+  background-color: grey;
   justify-content: center;
   align-items: center;
   gap: 1em;
@@ -25,7 +25,7 @@ const NavButton = styled(Link)`
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   font-size: 0.8em;
   &:hover{
-    color: blue;
+    color: lightgreen;
   }
 `
 
@@ -81,10 +81,11 @@ export default function Root() {
               <NavButton to={"/page_2"}>Luku- ja vuosi katselmointi</NavButton>
               <NavButton to={"/page_3"}>Turvallisuuskatselmointi</NavButton>
               <NavButton to={"/page_4"}>Toimintamallin ja johtamisen katselmointi </NavButton>
+              <NavButton onClick={handleSignOut}> Kirjaudu ulos </NavButton>
             </>
           )}
 
-          <NavButton onClick={handleSignOut}> Kirjaudu ulos </NavButton>
+          
         </Nav>
       </header>
 

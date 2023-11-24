@@ -5,6 +5,16 @@ import './KatselmointiSivut/Page1.jsx';
 import './KatselmointiSivut/Page2.jsx';
 import './KatselmointiSivut/Page3.jsx';
 import './KatselmointiSivut/Page4.jsx';
+import styled from 'styled-components';
+import { Link } from 'react-router-dom';
+
+
+const StyledLink = styled(Link)`
+  color: Blue;
+  text-decoration: none;
+  margin: 1rem;
+  position: relative;
+`;
 
 const MainPage = () => {
   
@@ -18,6 +28,21 @@ const MainPage = () => {
         <h3>Turvallisuuskatselmointi (Henkilökunta) </h3>
         <h3>Toimintamallin ja johtamisen katselmointi (Henkilökunta) </h3>
         <h4>Raportit (kaikille) </h4>
+        <StyledLink to ='/page_1'className='btn'>
+          Page1
+        </StyledLink>
+
+        <StyledLink to ='/page_2'>
+          Page2
+        </StyledLink>
+
+        <StyledLink to ='/page_3'>
+          Page3
+        </StyledLink>
+
+        <StyledLink to ='/page_4'>
+          Page4
+        </StyledLink>
     </div>
   );
 };
