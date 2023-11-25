@@ -28,6 +28,19 @@ const NavButton = styled(Link)`
     color: lightgreen;
   }
 `
+const NavLogout = styled(Link)`
+
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 0.8em;
+  &:hover{
+    color: #FA7070;
+  }
+`
 
 
 
@@ -81,7 +94,7 @@ export default function Root() {
               <NavButton to={"/page_2"}>Luku- ja vuosi katselmointi</NavButton>
               <NavButton to={"/page_3"}>Turvallisuuskatselmointi</NavButton>
               <NavButton to={"/page_4"}>Toimintamallin ja johtamisen katselmointi </NavButton>
-              <NavButton onClick={handleSignOut}> Kirjaudu ulos </NavButton>
+              <NavLogout onClick={handleSignOut}> Kirjaudu ulos </NavLogout>
             </>
           )}
 
