@@ -7,7 +7,7 @@ import './KatselmointiSivut/Page3.jsx';
 import './KatselmointiSivut/Page4.jsx';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-
+import './MainPage.css'
 
 const StyledLink = styled(Link)`
   color: Blue;
@@ -20,7 +20,9 @@ const MainPage = () => {
   
 
   return (
+    <body>
     <div style={{ textAlign: 'center', marginTop: '50px' }}>
+    
       <h1>Etusivu</h1>
       <h2>Tähän tulee router linkit katlsemointisivuille:</h2>
         <h3>Jatkuva katselmointi (Henkilökunta ja oppilaat) </h3>
@@ -43,7 +45,10 @@ const MainPage = () => {
         <StyledLink to ='/page_4'>
           Page4
         </StyledLink>
+        
     </div>
+    </body>
+    
   );
 };
 

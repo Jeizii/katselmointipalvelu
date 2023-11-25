@@ -84,13 +84,13 @@ export default function Root() {
     <div>
       {/* Jos pathname on indeksi, eli "/", vaihdetaan route eli URL sijaintiin /home */}
       {location.pathname === "/" && <Navigate to={"/home"}></Navigate>}
-      <header>
+      
         <Nav>
           <NavButton to={"/home"}>Koti</NavButton>
           {/* Jos polku sisältää tekstin "page", piilotetaan allaolevat linkit näkyvistä */}
           {!location.pathname.includes("page") && (
             <>
-              <NavButton to={"/page_1"}>Jakutva katselmointi</NavButton>
+              <NavButton to={"/page_1"}>Jatkuva katselmointi</NavButton>
               <NavButton to={"/page_2"}>Luku- ja vuosi katselmointi</NavButton>
               <NavButton to={"/page_3"}>Turvallisuuskatselmointi</NavButton>
               <NavButton to={"/page_4"}>Toimintamallin ja johtamisen katselmointi </NavButton>
@@ -100,7 +100,7 @@ export default function Root() {
 
           
         </Nav>
-      </header>
+      
 
       <div>
         <Outlet></Outlet>
