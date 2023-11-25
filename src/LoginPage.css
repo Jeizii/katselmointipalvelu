@@ -6,7 +6,8 @@ body {
   height: 100vh;
   margin: 0;
   background-color: rgba(201, 55, 67, 0.411);
-  filter: brightness(50%)
+  filter: brightness(50%);
+  color:black;
   
 }
 
