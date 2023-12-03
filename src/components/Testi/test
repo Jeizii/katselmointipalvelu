@@ -1,0 +1,81 @@
+const supabase = createClient('https://ozvupwelqotiudtrymxk.supabase.co', 
+'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im96dnVwd2VscW90aXVkdHJ5bXhrIiwicm9sZSI6ImFub24iLCJpYXQiOjE2OTk1Mjc3NDEsImV4cCI6MjAxNTEwMzc0MX0.4mzq3iSIVo9Kd9ONOtif-vXEoHssSusBZ48D3Ndntio')
+
+
+state ={
+  // Jos ei ole mitään filua
+  selectedFile: null,
+};
+
+  //Tiedoston valinta
+  onFileChange = (event) => {
+    this.setState({
+      selectedFile: event.target.files[0]
+    });
+  };
+//Kun tiedosto uploadaa
+  onFileUpload = () => {
+  const formData = new FormData();
+  //Update the form data object
+    formData.append(
+      "myFile",
+      this.state.selectedFile,
+      this.state.selectedFile.name
+    );
+
+    //Console logi
+    console.log(this.state.selectedFile);
+
+  };
+
+
+  handleUpload = async () => {
+    if (selectedFile) {
+      const { data, error } = await supabase.storage
+        .from('testbucket')
+        .upload(`/${selectedFile.name}`, selectedFile);
+
+      if (error) {
+        console.error('Error uploading file:', error.message);
+      } else {
+        console.log('File uploaded successfully:', data);
+        // You can perform additional actions after successful upload
+      }
+    }
+  };
+
+  // File content to be displayed after
+    // file upload is complete
+    fileData = () => {
+      if (this.state.selectedFile) {
+          return (
+              <div>
+                  <h2>File Details:</h2>
+                  <p>
+                      File Name:{" "}
+                      {this.state.selectedFile.name}
+                  </p>
+
+                  <p>
+                      File Type:{" "}
+                      {this.state.selectedFile.type}
+                  </p>
+
+                  <p>
+                      Last Modified:{" "}
+                      {this.state.selectedFile.lastModifiedDate.toDateString()}
+                  </p>
+              </div>
+          );
+      } else {
+          return (
+              <div>
+                  <br />
+                  <h4>
+                      Choose before Pressing the Upload
+                      button
+                  </h4>
+              </div>
+          );
+      }
+  };
