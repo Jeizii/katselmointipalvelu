@@ -48,7 +48,8 @@ export default function App() {
 
 
   if (!session) {
-    return (<Auth supabaseClient={supabase} appearance={{ theme: ThemeSupa }} />)
+    return (<Auth supabaseClient={supabase} appearance={{ theme: ThemeSupa }}  />)
+    
   }
   else {
     return (

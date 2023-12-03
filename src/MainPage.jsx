@@ -21,22 +21,22 @@ const MainPage = () => {
   return (
     <body>
       <div style={{ textAlign: 'center', marginTop: '50px' }}>
-        <h1>LINKISTÄ PÄÄSEE KATSOMAAN OHJEET</h1>
+        <h1>Tämä on Lapin ammattikorkeakoulun tilojen katselmointi sovellus</h1>
 
         {/* External Link */}
         <ExternalLink href="https://lucit-my.sharepoint.com/:p:/g/personal/dhaakila_edu_lapinamk_fi/EaLPAHL24LdCqF3FLcd-1BMBmQjXtah6TCs7h7nbN8KYAA?e=ZVbqgv" className="btn" target="_blank" rel="noopener noreferrer">
           LINKKI OHJEISTUKSEEN
         </ExternalLink>
-
+<p></p>
          {/* Internal Links */}
          <StyledLink to="/raportti1" className="btn">
-          Raportti 1
+          Raportit
         </StyledLink>
         <StyledLink to="/raportti2" className="btn">
           Raportti 2
         </StyledLink>
 
-        <h3>tämä on Lapin ammattikorkeakoulun tilojen katselmointi sovellus, voit jättää päällä olevista napeista palautetta</h3>
+        <h3></h3>
         <h3></h3>
       </div>
     </body>

@@ -25,7 +25,7 @@ const NavButton = styled(Link)`
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   font-size: 0.8em;
   &:hover{
-    color: lightgreen;
+    color: #a8fde8;
   }
 `
 const NavLogout = styled(Link)`

@@ -40,7 +40,7 @@ export const FileUploadComponent = () => {
       
       <form>
         <input type="file" name="image" onChange={handleFileChange} />
-        <button onClick= {handleUpload} >Nappi</button>
+        <button onClick= {handleUpload} >Lähetä</button>
         
       </form>
     </div>

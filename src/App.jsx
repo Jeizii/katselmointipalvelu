@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import LoginPage from './LoginPage';
 import MainPage from './MainPage';
-import Page1 from './KatselmointiSivut/Page1'; import Page2 from './KatselmointiSivut/Page2'; import Page3 from './KatselmointiSivut/Page3'; import Page4 from './KatselmointiSivut/Page4';
+
 
 const App = () => {
   const [isLoggedIn, setLoggedIn] = useState(false);

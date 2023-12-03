@@ -132,7 +132,7 @@ const Page2 = () => {
     <div style={{ textAlign: 'center', marginTop: '50px' }}>
       <Container>
         <FormBox>
-          <h2>Jatkuva katselmointi</h2>
+          <h2>Luku- ja vuosi katselmointi</h2>
           <StyledForm>
             <StyledLabel>
               Katselmointiryhmä:

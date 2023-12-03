@@ -135,7 +135,7 @@ const Page4 = () => {
     <div style={{ textAlign: 'center', marginTop: '50px' }}>
       <Container>
         <FormBox>
-          <h2>Jatkuva katselmointi</h2>
+          <h2>Toimintamallin ja johtamisen katselmointi</h2>
           <StyledForm>
             <StyledLabel>
               Katselmointiryhmä:
