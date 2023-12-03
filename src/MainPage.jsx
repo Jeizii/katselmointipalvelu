@@ -45,7 +45,9 @@ const MainPage = () => {
         <StyledLink to ='/page_4'>
           Page4
         </StyledLink>
-        
+
+        <h3>tämä on lapin ammattikorkeakoulun tilojen katselmointi sovellus, voit jättää päällä olevista napeista palautetta</h3>
+        <h3></h3>
     </div>
     </body>
     
