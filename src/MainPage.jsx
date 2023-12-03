@@ -28,6 +28,14 @@ const MainPage = () => {
           LINKKI OHJEISTUKSEEN
         </ExternalLink>
 
+         {/* Internal Links */}
+         <StyledLink to="/raportti1" className="btn">
+          Raportti 1
+        </StyledLink>
+        <StyledLink to="/raportti2" className="btn">
+          Raportti 2
+        </StyledLink>
+
         <h3>tämä on Lapin ammattikorkeakoulun tilojen katselmointi sovellus, voit jättää päällä olevista napeista palautetta</h3>
         <h3></h3>
       </div>
