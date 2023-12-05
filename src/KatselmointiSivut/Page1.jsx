@@ -174,7 +174,8 @@ const Page1 = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
+    <Link to="/goodbye">
+    </Link>
     
     const images = await handleUpload();
 
