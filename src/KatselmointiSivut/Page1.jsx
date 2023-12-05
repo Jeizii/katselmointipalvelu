@@ -106,8 +106,12 @@ const Page1 = () => {
   const [selectedOptionsValinta1, setSelectedOptionsValinta1] = useState(["-"]);
   const [selectedOptionsValinta2, setSelectedOptionsValinta2] = useState(["-"]);
   const [selectedOptionKampus, setSelectedOptionKampus] = useState("-");
-
+  const [selectedOptionkatselmointiryhma, setSelectedOptionskatselmointiryhma] = useState(["-"])
   const [filesUploaded, setFilesUploaded] = useState([]);
+  const [selectedOptionNotes, setSelectedOptionsNotes] = useState(["-"]);
+  const [selectedOptionsOtherNotes, setSelectedOptionsOtherNotes] = useState(["-"])
+  const [selectedOptionsDate, setSelectedOptionsDate] = useState(["-"])
+  
 
   const handleDropdownChangeTila = (event) => {
     setSelectedOptionsTila([event.target.value]);
@@ -115,6 +119,9 @@ const Page1 = () => {
 
   const handleDropdownChangeKampus = (event) => {
     setSelectedOptionKampus(event.target.value);
+  };
+  const handleKatselmointiryhmaChange = (event) => {
+    setSelectedOptionskatselmointiryhma(event.target.value);
   };
 
   const handleCheckboxChangeValinta1 = (event) => {
@@ -126,6 +133,18 @@ const Page1 = () => {
         return [option];
       }
     });
+  };
+
+  const handleNotesChange = (event) => {
+    setSelectedOptionsNotes(event.target.value);
+  };
+
+  const handleDateChange = (event) => {
+    setSelectedOptionsDate(event.target.value);
+  };
+
+  const handleOtherNotesChange = (event) => {
+    setSelectedOptionsOtherNotes(event.target.value);
   };
 
   const handleCheckboxChangeValinta2 = (event) => {
@@ -184,7 +203,10 @@ const Page1 = () => {
       selectedOptionsTila,
       selectedOptionsValinta1,
       selectedOptionKampus,
-      files: images
+      selectedOptionNotes,
+      selectedOptionsOtherNotes,
+      selectedOptionsDate,
+      files: images,
     };
     console.log(payload);
 
@@ -192,13 +214,14 @@ const Page1 = () => {
 
      const { data, error } = await supabase
       .from('Form').insert([{
-          group: "Olli Opettaja, Jaska Jokunen",
-          campus: "Rovaniemi",
-          space: "B321",
-          condition: "Hyvä",
-          notes: "Kaikki ok",
-          images: images.join(), // Tekee arraysa stringin: "kuva_abc.png,kuva_123.jpg"
-          other_notes: ""
+          group: selectedOptionkatselmointiryhma,
+          campus: selectedOptionKampus,
+          space: selectedOptionsTila,
+          condition: selectedOptionsValinta1,
+          notes: selectedOptionNotes,
+          images: images, // Tekee arraysa stringin: "kuva_abc.png,kuva_123.jpg"
+          other_notes: selectedOptionsOtherNotes,
+          date: selectedOptionsDate
         },
       ])
       .select() 
@@ -206,7 +229,7 @@ const Page1 = () => {
       
       // Voidaan navigoida esim. sivulle jossa tehtyä katselmointia voidaan tarkastella 
       // id:n perusteella
-      navigate("/home/")
+      navigate("/home")
       
       /* 
       
@@ -231,13 +254,15 @@ const Page1 = () => {
           <StyledForm onSubmit={handleSubmit}>
             <StyledLabel>
               Katselmointiryhmä:
-              <StyledInput type="text" name="text" />
+              <StyledInput type="text" name="text"
+              onChange={handleKatselmointiryhmaChange} />
             </StyledLabel>
 
             <p></p>
             <StyledLabel>
               Päivämäärä:
-              <StyledInput type="text" name="date" />
+              <StyledInput type="text" name="date"
+              onChange={handleDateChange} />
               Katselmointi suoritetaan 1-4 kertaa kuussa
             </StyledLabel>
 
@@ -290,7 +315,11 @@ const Page1 = () => {
 
             <StyledLabel>
               Muuta huomioita / kehitysideat:
-              <StyledTextArea></StyledTextArea>
+              <StyledTextArea
+                  type="text"
+                  name="text"
+                  onChange={handleOtherNotesChange}
+              />
               <FileUploadComponent
                 setFilesUploaded={setFilesUploaded}
               ></FileUploadComponent>
@@ -298,7 +327,12 @@ const Page1 = () => {
               {filesUploaded.map(f => f.name).join(" ")}
       
               <p>Mitä positiivista olet huomannut tarkastusjaksolla?</p>
-              <StyledTextArea></StyledTextArea>
+              
+              <StyledTextArea
+                type="text"
+                  name="text"
+                  onChange={handleNotesChange}
+              />
             </StyledLabel>
 
             <StyledButton type="submit">Submit</StyledButton>
