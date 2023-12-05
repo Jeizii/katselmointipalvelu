@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
 
-const GoodbyePage = () => {
+const GoodByePage = () => {
   return (
     <body>
       <div style={{ textAlign: 'center', marginTop: '50px' }}>
