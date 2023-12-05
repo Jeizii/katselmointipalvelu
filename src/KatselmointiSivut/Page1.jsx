@@ -2,9 +2,6 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import FileUploadComponent from "../components/FileUploadComponent";
 import { supabase } from "../services/supabase";
-import { useNavigate } from 'react-router-dom';
-
-
 const Container = styled.div`
   display: grid;
   place-items: center;
@@ -75,7 +72,7 @@ const StyledButton = styled.button`
   border-radius: 5px;
   cursor: pointer;
 `;
-const navigate = useNavigate();
+
 const publicImageBaseURL =
   "https://ozvupwelqotiudtrymxk.supabase.co/storage/v1/object/public/testbucket/";
 
@@ -177,18 +174,18 @@ const Page1 = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    <Link to="/goodbye">
+    </Link>
     
     const images = await handleUpload();
 
     console.log(images)
-
+    
     const payload = {
       selectedOptionsTila,
       selectedOptionsValinta1,
       selectedOptionKampus,
       files: images
-
-
     };
     console.log(payload);
 
@@ -210,6 +207,7 @@ const Page1 = () => {
       
       // Voidaan navigoida esim. sivulle jossa tehtyä katselmointia voidaan tarkastella 
       // id:n perusteella
+      navigate("/home/")
       
       /* 
       
@@ -223,7 +221,7 @@ const Page1 = () => {
         image ( path )
       `).eq("id", 1) 
       */
-      navigate('/GoodbyePage');
+      
   };
 
   return (
