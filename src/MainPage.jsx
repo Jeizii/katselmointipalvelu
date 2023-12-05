@@ -29,11 +29,11 @@ const MainPage = () => {
         </ExternalLink>
 <p></p>
          {/* Internal Links */}
-         <StyledLink to="/raportti1" className="btn">
-          Raportit
+         <StyledLink to='/hyv_raportit' className='btn'>
+          Hyväksytyt Raportit
         </StyledLink>
-        <StyledLink to="/raportti2" className="btn">
-          Raportti 2
+        <StyledLink to='/tar_raportit' className='btn'>
+          Tarkistettavat raportit
         </StyledLink>
 
         <h3></h3>

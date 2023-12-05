@@ -7,8 +7,9 @@ import Page1 from './KatselmointiSivut/Page1.jsx'
 import Page2 from './KatselmointiSivut/Page2.jsx'
 import Page3 from './KatselmointiSivut/Page3.jsx'
 import Page4 from './KatselmointiSivut/Page4.jsx'
-
-
+import GoodbyePage from './GoodbyePage.jsx'
+import HyvRap from './RaporttiSivut/HyvRaportit.jsx'
+import TarRap from './RaporttiSivut/TarRaportit.jsx'
 const router = createBrowserRouter([
 
   {
@@ -34,7 +35,19 @@ const router = createBrowserRouter([
       {
         path:"/page_4",
         element: <Page4></Page4>
-      }
+      },
+      {
+        path:"/moikkamoi",
+        element: <GoodbyePage></GoodbyePage>
+      },
+      {
+        path:"/hyv_raportit",
+        element: <HyvRap></HyvRap>
+      },
+      {
+        path:"/tar_raportit",
+        element: <TarRap></TarRap>
+      },
     ]
   },
 
