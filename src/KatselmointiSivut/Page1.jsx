@@ -190,7 +190,7 @@ const Page1 = () => {
 
     // Tässä lähetys supabasen tietokantaan
 
-    /* const { data, error } = await supabase
+     const { data, error } = await supabase
       .from('Form').insert([{
           group: "Olli Opettaja, Jaska Jokunen",
           campus: "Rovaniemi",
@@ -201,26 +201,26 @@ const Page1 = () => {
           other_notes: ""
         },
       ])
-      .select() */
+      .select() 
 
       
       // Voidaan navigoida esim. sivulle jossa tehtyä katselmointia voidaan tarkastella 
       // id:n perusteella
-      // navigate("/katselmoinnit/" + data.id)
+      navigate("/home/")
       
       /* 
       
       Relaatiot.
 
       Tässä esimerkissä image on omassa taulussa. Imagella on formin id jolle se kuuluu,
-      joten se voidaan hakea mukaan dataan yhdellä queryllä seuraavasti:
-
+      joten se voidaan hakea mukaan dataan yhdellä queryllä seuraavasti:*/
+/*
       const { data, error } = await supabase.from('Form').select(`
         *,
         image ( path )
       `).eq("id", 1) 
-      
       */
+      
   };
 
   return (
