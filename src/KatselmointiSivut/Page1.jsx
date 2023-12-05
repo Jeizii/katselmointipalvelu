@@ -28,6 +28,7 @@ const StyledForm = styled.form`
 
 const StyledLabel = styled.label`
   margin-bottom: 8px;
+  
 `;
 
 const StyledInput = styled.input`
