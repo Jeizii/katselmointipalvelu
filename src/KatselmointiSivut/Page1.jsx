@@ -2,8 +2,6 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import FileUploadComponent from "../components/FileUploadComponent";
 import { supabase } from "../services/supabase";
-import { useHistory } from 'react-router-dom';
-
 const Container = styled.div`
   display: grid;
   place-items: center;
@@ -111,8 +109,6 @@ const Page1 = () => {
 
   const [filesUploaded, setFilesUploaded] = useState([]);
 
-  const history = useHistory();
-
   const handleDropdownChangeTila = (event) => {
     setSelectedOptionsTila([event.target.value]);
   };
@@ -178,12 +174,12 @@ const Page1 = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    <Link to="/goodbye">
+    </Link>
     
     const images = await handleUpload();
 
     console.log(images)
-
-    history.push('/goodbye');
     
     const payload = {
       selectedOptionsTila,
