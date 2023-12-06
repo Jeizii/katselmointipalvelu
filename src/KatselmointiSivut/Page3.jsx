@@ -6,7 +6,7 @@ import FileUploadComponent from '../components/FileUploadComponent';
 import ShowImage from '../components/ShowImage';
 import { useState } from "react";
 import styled from 'styled-components';
-
+import { supabase } from "../services/supabase";
 
 
 const Container = styled.div`
@@ -86,63 +86,275 @@ const StyledButton = styled.button`
   cursor: pointer;
 `;
 
-const Page3 = () => {
-  const [selectedOptionTila, setSelectedOptionTila] = useState("-");
+const publicImageBaseURL =
+  "https://ozvupwelqotiudtrymxk.supabase.co/storage/v1/object/public/testbucket/";
 
-	const  handleDropdownChangeTila = (event) => {
-		setSelectedOptionTila(event.target.value);
-  }
-  const [selectedOptionKampus, setSelectedOptionKampus] = useState("-");
-
-	const  handleDropdownChangeKampus = (event) => {
-		setSelectedOptionKampus(event.target.value);
-  }
+const CheckboxGroup = ({
+  label,
+  options,
+  selectedOptions,
+  handleCheckboxChange,
+}) => {
   return (
-  <Container>
-  
-  <FormBox>
-  <form>
-    <div style={{ textAlign: 'center', marginTop: '50px' }}>
-      <h2>Turvallisuuskatselmointi</h2>
-      Näytä Kuva
-      
-      <p>
-      
-
-        
-
-      <ShowImage></ShowImage>
-
-        Tallenna Kuva pilveen
-
-        <FileUploadComponent></FileUploadComponent>
-
-
-        <p></p>
-                    Tila:
-                      <StyledSelect  value={selectedOptionTila} onChange={handleDropdownChangeTila}>
-                      <option  value="-">-</option>
-                      <option  value="A310">A310</option>
-                      <option  value="A311">A311</option>
-                      <option  value="A312">A312</option>
-                      <option  value="A313">A313</option>
-                      <option  value="A314">A314</option>
-                      <option  value="A315">A315</option>
-                    </StyledSelect>
-                  
-                 Valittu tila: {selectedOptionTila} 
-                 <p></p>
-                Tälle sivulle tulee turvallisuuskatselmointi
-
-        
-
-      </p>
+    <div>
+      <StyledLabel>{label}:</StyledLabel>
+      {options.map((option) => (
+        <div key={option}>
+          <input
+            type="checkbox"
+            id={`${option}_${label}_checkbox`}
+            value={option}
+            checked={selectedOptions.includes(option)}
+            onChange={handleCheckboxChange}
+          />
+          <label htmlFor={`${option}_${label}_checkbox`}>{option}</label>
+        </div>
+      ))}
     </div>
+  );
+};
+
+const Page3 = () => {
+  const [selectedOptionsTila, setSelectedOptionsTila] = useState(["-"]);
+  const [selectedOptionsValinta1, setSelectedOptionsValinta1] = useState(["-"]);
+  const [selectedOptionsValinta2, setSelectedOptionsValinta2] = useState(["-"]);
+  const [selectedOptionKampus, setSelectedOptionKampus] = useState("-");
+  const [selectedOptionkatselmointiryhma, setSelectedOptionskatselmointiryhma] = useState(["-"])
+  const [filesUploaded, setFilesUploaded] = useState([]);
+  const [selectedOptionNotes, setSelectedOptionsNotes] = useState(["-"]);
+  const [selectedOptionsOtherNotes, setSelectedOptionsOtherNotes] = useState(["-"])
+  const [selectedOptionsDate, setSelectedOptionsDate] = useState(["-"])
+  
+
+  const handleDropdownChangeTila = (event) => {
+    setSelectedOptionsTila([event.target.value]);
+  };
+
+  const handleDropdownChangeKampus = (event) => {
+    setSelectedOptionKampus(event.target.value);
+  };
+  const handleKatselmointiryhmaChange = (event) => {
+    setSelectedOptionskatselmointiryhma(event.target.value);
+  };
+
+  const handleCheckboxChangeValinta1 = (event) => {
+    const option = event.target.value;
+    setSelectedOptionsValinta1((prevSelectedOptions) => {
+      if (prevSelectedOptions.includes(option)) {
+        return prevSelectedOptions.filter((selected) => selected !== option);
+      } else {
+        return [option];
+      }
+    });
+  };
+
+  const handleNotesChange = (event) => {
+    setSelectedOptionsNotes(event.target.value);
+  };
+
+  const handleDateChange = (event) => {
+    setSelectedOptionsDate(event.target.value);
+  };
+
+  const handleOtherNotesChange = (event) => {
+    setSelectedOptionsOtherNotes(event.target.value);
+  };
+
+  const handleCheckboxChangeValinta2 = (event) => {
+    const option = event.target.value;
+    setSelectedOptionsValinta2((prevSelectedOptions) => {
+      if (prevSelectedOptions.includes(option)) {
+        return prevSelectedOptions.filter((selected) => selected !== option);
+      } else {
+        return [option];
+      }
+    });
+  };
+
+  const handleUpload = async () => {
+
+    if (filesUploaded.length > 0) {
+      const filePromises = filesUploaded.map((file) => {
+        return supabase.storage
+          .from("testbucket")
+          .upload(`/${file.name}`, file);
+      });
+
+      const files = await Promise.allSettled(filePromises);
+
+      return files.map((response) => {
+
+      
+
+        if(response.status === 'rejected'){
+          console.log(response.reason)
+          return null
+        }
+
+        const {data, error} = response.value
+
+        if (error) {
+          console.error("Error uploading file:", error.message);
+          return null
+        } else {
+          console.log("File uploaded successfully:", data);
+          return data.path;
+        }
+      });
+    }
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+ 
     
-    </form>
-    </FormBox>
-    </Container>
+    const images = await handleUpload();
+
+    console.log(images)
+    
+    const payload = {
+      selectedOptionsTila,
+      selectedOptionsValinta1,
+      selectedOptionKampus,
+      selectedOptionNotes,
+      selectedOptionsOtherNotes,
+      selectedOptionsDate,
+      files: images,
+    };
+    console.log(payload);
+
+    // Tässä lähetys supabasen tietokantaan
+
+     const { data, error } = await supabase
+      .from('Form').insert([{
+          group: selectedOptionkatselmointiryhma,
+          campus: selectedOptionKampus,
+          space: selectedOptionsTila,
+          condition: selectedOptionsValinta1,
+          notes: selectedOptionNotes,
+          images: images, // Tekee arraysa stringin: "kuva_abc.png,kuva_123.jpg"
+          other_notes: selectedOptionsOtherNotes,
+          date: selectedOptionsDate
+        },
+      ])
+      .select() 
+
+      
+      // Voidaan navigoida esim. sivulle jossa tehtyä katselmointia voidaan tarkastella 
+      // id:n perusteella
+      navigate("/home")
+      
+      /* 
+      
+      Relaatiot.
+
+      Tässä esimerkissä image on omassa taulussa. Imagella on formin id jolle se kuuluu,
+      joten se voidaan hakea mukaan dataan yhdellä queryllä seuraavasti:*/
+/*
+      const { data, error } = await supabase.from('Form').select(`
+        *,
+        image ( path )
+      `).eq("id", 1) 
+      */
+      
+  };
+
+  return (
+    <div style={{ textAlign: "center", marginTop: "50px" }}>
+      <Container>
+        <FormBox>
+          <h2>Turvallisuuskatselmointi</h2>
+          <StyledForm onSubmit={handleSubmit}>
+            <StyledLabel>
+              Katselmointiryhmä:
+              <StyledInput type="text" name="text"
+              onChange={handleKatselmointiryhmaChange} />
+            </StyledLabel>
+
+            <p></p>
+            <StyledLabel>
+              Päivämäärä:
+              <StyledInput type="text" name="date"
+              onChange={handleDateChange} />
+              Katselmointi suoritetaan 1-4 kertaa kuussa
+            </StyledLabel>
+
+            <p></p>
+            <StyledLabel>
+              Kampus:
+              <StyledSelect
+                value={selectedOptionKampus}
+                onChange={handleDropdownChangeKampus}
+              >
+                <option value="-">-</option>
+                <option value="LAY">Lapin yliopisto</option>
+                <option value="LAMK Rovaniemi">Lapin ammattikorkeakoulu</option>
+              </StyledSelect>
+              Valittu Kampus: {selectedOptionKampus}
+            </StyledLabel>
+
+            <p></p>
+            <StyledLabel>
+              Tila:
+              <StyledSelect
+                value={selectedOptionsTila[0]}
+                onChange={handleDropdownChangeTila}
+              >
+                <option value="-">-</option>
+                <option value="A310">A310</option>
+                <option value="A311">A311</option>
+                <option value="A312">A312</option>
+                <option value="A313">A313</option>
+                <option value="A314">A314</option>
+                <option value="A315">A315</option>
+              </StyledSelect>
+              Valittu tila: {selectedOptionsTila.join(", ")}
+            </StyledLabel>
+
+            <p></p>
+            <StyledLabel>
+              <CheckboxGroup
+                label="Yleisilme"
+                options={["Hyvä", "Tyydyttävä", "Huono"]}
+                selectedOptions={selectedOptionsValinta1}
+                handleCheckboxChange={handleCheckboxChangeValinta1}
+              />
+            </StyledLabel>
+
+            <p></p>
+            <p></p>
+
+            <p></p>
+
+            <StyledLabel>
+              Muuta huomioita / kehitysideat:
+              <StyledTextArea
+                  type="text"
+                  name="text"
+                  onChange={handleOtherNotesChange}
+              />
+              <FileUploadComponent
+                setFilesUploaded={setFilesUploaded}
+              ></FileUploadComponent>
+
+              {filesUploaded.map(f => f.name).join(" ")}
+      
+              <p>Mitä positiivista olet huomannut tarkastusjaksolla?</p>
+              
+              <StyledTextArea
+                type="text"
+                  name="text"
+                  onChange={handleNotesChange}
+              />
+            </StyledLabel>
+
+            <StyledButton type="submit">Submit</StyledButton>
+          </StyledForm>
+        </FormBox>
+      </Container>
+    </div>
   );
 };
 
 export default Page3;
+
