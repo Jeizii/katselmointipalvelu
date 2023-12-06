@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import FileUploadComponent from "../components/FileUploadComponent";
 import { supabase } from "../services/supabase";
+import { useNavigate } from 'react-router-dom';
+
 const Container = styled.div`
   display: grid;
   place-items: center;
@@ -113,6 +115,7 @@ const Page1 = () => {
   const [selectedOptionsOtherNotes, setSelectedOptionsOtherNotes] = useState(["-"])
   const [selectedOptionsDate, setSelectedOptionsDate] = useState(["-"])
   
+  const navigateTo = useNavigate();
 
   const handleDropdownChangeTila = (event) => {
     setSelectedOptionsTila([event.target.value]);
@@ -194,8 +197,7 @@ const Page1 = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    <Link to="/goodbye">
-    </Link>
+
     
     const images = await handleUpload();
 
@@ -231,7 +233,7 @@ const Page1 = () => {
       
       // Voidaan navigoida esim. sivulle jossa tehtyä katselmointia voidaan tarkastella 
       // id:n perusteella
-      navigate("/home")
+      navigateTo('/GoodbyePage')
       
       /* 
       

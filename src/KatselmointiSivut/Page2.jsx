@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
 
 const Container = styled.div`
   display: grid;
@@ -72,6 +73,7 @@ const StyledButton = styled.button`
   cursor: pointer;
 `;
 
+
 const CheckboxGroup = ({ label, options, selectedOptions, handleCheckboxChange }) => {
   return (
     <div>
@@ -97,6 +99,13 @@ const Page2 = () => {
   const [selectedOptionsValinta1, setSelectedOptionsValinta1] = useState(["-"]);
   const [selectedOptionsValinta2, setSelectedOptionsValinta2] = useState(["-"]);
   const [selectedOptionKampus, setSelectedOptionKampus] = useState("-");
+  const navigateTo = useNavigate();
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+  
+    navigateTo('/GoodbyePage')
+  };
 
   const handleDropdownChangeTila = (event) => {
     setSelectedOptionsTila([event.target.value]);
@@ -204,7 +213,7 @@ const Page2 = () => {
               <StyledTextArea></StyledTextArea>
             </StyledLabel>
 
-            <StyledButton type="submit">Submit</StyledButton>
+            <StyledButton type="button" onClick={handleSubmit}> Submit </StyledButton>
           </StyledForm>
         </FormBox>
       </Container>

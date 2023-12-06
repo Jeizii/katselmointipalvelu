@@ -37,7 +37,7 @@ const router = createBrowserRouter([
         element: <Page4></Page4>
       },
       {
-        path:"/moikkamoi",
+        path:"/GoodbyePage",
         element: <GoodbyePage></GoodbyePage>
       },
       {
