@@ -124,7 +124,109 @@ const Page3 = () => {
   const [selectedOptionNotes, setSelectedOptionsNotes] = useState(["-"]);
   const [selectedOptionsOtherNotes, setSelectedOptionsOtherNotes] = useState(["-"])
   const [selectedOptionsDate, setSelectedOptionsDate] = useState(["-"])
+  const [selectedOptionsCheckSafety, setSelectedOptionsCheckSafety] = useState(["-"])
+  const [selectedOptionsCheckRisk, setSelectedOptionsCheckRisk] = useState(["-"])
+  const [selectedOptionsCheckGear, setSelectedOptionsCheckGear] = useState(["-"])
+  const [selectedOptionsCheckEmergency, setSelectedOptionsCheckEmergency] = useState(["-"])
+  const [selectedOptionsCheckChemical, setSelectedOptionsCheckChemical] = useState(["-"])
+  const [selectedOptionsCheckRad, setSelectedOptionsCheckRad] = useState(["-"])
+  const [selectedOptionsCheckExplosive, setSelectedOptionsCheckExplosive] = useState (["-"])
+  const [selectedOptionsCheckSafetyFind, setSelectedOptionsCheckSafetyFind] = useState (["-"])
+
+
+  const handleChangeSafetyFind = (event) => {
+    const option = event.target.value;
+    setSelectedOptionsCheckSafetyFind((prevSelectedOptions) => {
+      if (prevSelectedOptions.includes(option)) {
+        return prevSelectedOptions.filter((selected) => selected !== option);
+      } else {
+        return [option];
+      }
+    });
+  };
+
+  const handleChangeExplosion = (event) => {
+    const option = event.target.value;
+    setSelectedOptionsCheckExplosive((prevSelectedOptions) => {
+      if (prevSelectedOptions.includes(option)) {
+        return prevSelectedOptions.filter((selected) => selected !== option);
+      } else {
+        return [option];
+      }
+    });
+  };
+
+
+  const handleChangeRad = (event) => {
+    const option = event.target.value;
+    setSelectedOptionsCheckRad((prevSelectedOptions) => {
+      if (prevSelectedOptions.includes(option)) {
+        return prevSelectedOptions.filter((selected) => selected !== option);
+      } else {
+        return [option];
+      }
+    });
+  };
+
+
+  const handleChangeGear = (event) => {
+    const option = event.target.value;
+    setSelectedOptionsCheckGear((prevSelectedOptions) => {
+      if (prevSelectedOptions.includes(option)) {
+        return prevSelectedOptions.filter((selected) => selected !== option);
+      } else {
+        return [option];
+      }
+    });
+  };
+
+  const handleChangeChemical = (event) => {
+    const option = event.target.value;
+    setSelectedOptionsCheckChemical((prevSelectedOptions) => {
+      if (prevSelectedOptions.includes(option)) {
+        return prevSelectedOptions.filter((selected) => selected !== option);
+      } else {
+        return [option];
+      }
+    });
+  };
+
+
+  const handleChangeEmergency = (event) => {
+    const option = event.target.value;
+    setSelectedOptionsCheckEmergency((prevSelectedOptions) => {
+      if (prevSelectedOptions.includes(option)) {
+        return prevSelectedOptions.filter((selected) => selected !== option);
+      } else {
+        return [option];
+      }
+    });
+  };
+
+  const handleChangeRisk = (event) => {
+    const option = event.target.value;
+    setSelectedOptionsCheckRisk((prevSelectedOptions) => {
+      if (prevSelectedOptions.includes(option)) {
+        return prevSelectedOptions.filter((selected) => selected !== option);
+      } else {
+        return [option];
+      }
+    });
+  };
+
   
+
+  const handleChangeCheckSafety = (event) => {
+    const option = event.target.value;
+    setSelectedOptionsCheckSafety((prevSelectedOptions) => {
+      if (prevSelectedOptions.includes(option)) {
+        return prevSelectedOptions.filter((selected) => selected !== option);
+      } else {
+        return [option];
+      }
+    });
+  };
+
 
   const handleDropdownChangeTila = (event) => {
     setSelectedOptionsTila([event.target.value]);
@@ -220,9 +322,16 @@ const Page3 = () => {
       selectedOptionsOtherNotes,
       selectedOptionsDate,
       files: images,
+      selectedOptionsCheckSafety,
+      selectedOptionsCheckChemical,
+      selectedOptionsCheckEmergency,
+      selectedOptionsCheckGear,
+      selectedOptionsCheckRisk,
+      selectedOptionsCheckRad,
+      selectedOptionsCheckExplosive,
+      selectedOptionsCheckSafetyFind
     };
     console.log(payload);
-
     // Tässä lähetys supabasen tietokantaan
 
      const { data, error } = await supabase
@@ -234,7 +343,7 @@ const Page3 = () => {
           notes: selectedOptionNotes,
           images: images, // Tekee arraysa stringin: "kuva_abc.png,kuva_123.jpg"
           other_notes: selectedOptionsOtherNotes,
-          date: selectedOptionsDate
+          date: selectedOptionsDate,
         },
       ])
       .select() 
@@ -319,6 +428,70 @@ const Page3 = () => {
                 selectedOptions={selectedOptionsValinta1}
                 handleCheckboxChange={handleCheckboxChangeValinta1}
               />
+              <p></p>
+              <p></p>
+                <CheckboxGroup
+                label="Turvallisuusohjeistukset, Ovatko ne saatavilla ja ajantasaiset, Noudetetaanko annettuja ohjeita?"
+                options={["Puutteellinen", "Sitoutunut", "Edelläkävijä"]}
+                selectedOptions={selectedOptionsCheckSafety}
+                handleCheckboxChange={handleChangeCheckSafety}
+              />
+              <p></p>
+              
+              <p></p>
+                <CheckboxGroup
+                label="Toiminnan riskiarviointi, Onko riskiarviointi ajantasalla ja onko toiminnan riskiä mahdollisuus pienentää?"
+                options={["Puutteellinen", "Sitoutunut", "Edelläkävijä"]}
+                selectedOptions={selectedOptionsCheckRisk}
+                handleCheckboxChange={handleChangeRisk}
+              />
+              <p></p>
+              <p></p>
+
+                <CheckboxGroup
+                label="Suojavarusteet, Onko henkilökohtaiset suojavarusteet tunnistettu ja saatavilla? Käytetäänkö niitä?"
+                options={["Puutteellinen", "Sitoutunut", "Edelläkävijä"]}
+                selectedOptions={selectedOptionsCheckGear}
+                handleCheckboxChange={handleChangeGear}
+              />
+                <p></p>
+                <CheckboxGroup
+                label="Ensiapu- ja palosammuttimet, Onko ensiaputarvikkeet ja palosammuttimet käytettävissä ja ajan tasalla?"
+                options={["Puutteellinen", "Sitoutunut", "Edelläkävijä"]}
+                selectedOptions={selectedOptionsCheckEmergency}
+                handleCheckboxChange={handleChangeEmergency}
+              />
+              <p></p>
+               <CheckboxGroup
+                label="Kemikaalien hallinta, Onko kemikaaliluettelot ajan tasalla? Säilytetäänkö kemikaalit asianmukaisesti? Onko varoitusmerkit ja käyttöturvatiedotteet saatavilla?"
+                options={["Puutteellinen", "Sitoutunut", "Edelläkävijä"]}
+                selectedOptions={selectedOptionsCheckChemical}
+                handleCheckboxChange={handleChangeChemical}
+              />  
+              <p></p>
+              <CheckboxGroup
+                label="Räjähdyssuoja-arviointi, Käsitelläänkö tilassa kemikaaleja tai pölyjä? Onko räjähdyssuoja-arviointi ajantasalla?"
+                options={["Puutteellinen", "Sitoutunut", "Edelläkävijä"]}
+                selectedOptions={selectedOptionsCheckExplosive}
+                handleCheckboxChange={handleChangeExplosion}
+              />  
+
+              <p></p>
+
+              <CheckboxGroup
+                label="Säteilyturvallisuusdokumentit, Onko säteilyturvallisuusohjeet ja luvat ajantasalla?"
+                options={["Puutteellinen", "Sitoutunut", "Edelläkävijä"]}
+                selectedOptions={selectedOptionsCheckRad}
+                handleCheckboxChange={handleChangeRad}
+              />  
+              <p></p>
+              <CheckboxGroup
+                label="Turvallisuushavainnot, Onko tilasta tullut turvallisuushavaintoja? Onko korjaavat toimenpiteet tehty?"
+                options={["Puutteellinen", "Sitoutunut", "Edelläkävijä"]}
+                selectedOptions={selectedOptionsCheckSafetyFind}
+                handleCheckboxChange={handleChangeSafetyFind}
+              />  
+
             </StyledLabel>
 
             <p></p>
