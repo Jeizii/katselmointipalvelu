@@ -1,8 +1,12 @@
 // Page4.jsx
-import React, { useState } from 'react';
+import React from 'react';
+import { SupabaseClient, createClient } from '@supabase/supabase-js';
+import Supabaseinit from '../components/SupabaseClient';
+
+import { useState } from "react";
 import styled from 'styled-components';
-import FileUploadComponent from '../components/FileUploadComponent';
-import ShowImage from '../components/ShowImage';
+import { supabase } from "../services/supabase";
+
 
 const Container = styled.div`
   display: grid;
@@ -13,13 +17,17 @@ const Container = styled.div`
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   margin-bottom: 12px;
   font-weight: bold;
+  center: align;
 `;
 
 const FormBox = styled.div`
   padding: 20px;
-  border: 20px solid #ccc;
+  border: 20px solid #ccc; /* Increase border thickness */
   border-radius: 8px;
-  width: 300px;
+  border: center;
+  width: 300px; /* Adjust width as needed */
+  background-color: #55ff00;
+  
 `;
 
 const StyledForm = styled.form`
@@ -30,9 +38,11 @@ const StyledForm = styled.form`
 
 const StyledLabel = styled.label`
   margin-bottom: 8px;
+  
 `;
 
 const StyledInput = styled.input`
+
   width: 100%;
   padding: 2px;
   font-size: 16px;
@@ -40,8 +50,8 @@ const StyledInput = styled.input`
   border: 1px solid #808080;
   border-radius: 4px;
   outline: none;
+  
 `;
-
 const StyledSelect = styled.select`
   width: 100%;
   padding: 8px;
@@ -75,7 +85,15 @@ const StyledButton = styled.button`
   cursor: pointer;
 `;
 
-const CheckboxGroup = ({ label, options, selectedOptions, handleCheckboxChange }) => {
+const publicImageBaseURL =
+  "https://ozvupwelqotiudtrymxk.supabase.co/storage/v1/object/public/testbucket/";
+
+const CheckboxGroup = ({
+  label,
+  options,
+  selectedOptions,
+  handleCheckboxChange,
+}) => {
   return (
     <div>
       <StyledLabel>{label}:</StyledLabel>
@@ -88,6 +106,9 @@ const CheckboxGroup = ({ label, options, selectedOptions, handleCheckboxChange }
             checked={selectedOptions.includes(option)}
             onChange={handleCheckboxChange}
           />
+
+          
+
           <label htmlFor={`${option}_${label}_checkbox`}>{option}</label>
         </div>
       ))}
@@ -96,22 +117,23 @@ const CheckboxGroup = ({ label, options, selectedOptions, handleCheckboxChange }
 };
 
 const Page4 = () => {
-  const [selectedOptionsTila, setSelectedOptionsTila] = useState(["-"]);
-  const [selectedOptionsValinta1, setSelectedOptionsValinta1] = useState(["-"]);
-  const [selectedOptionsValinta2, setSelectedOptionsValinta2] = useState(["-"]);
-  const [selectedOptionKampus, setSelectedOptionKampus] = useState("-");
+  const [selectedOptionsResponsiblePerson, setSelectedOptionsResponsiblePerson] = useState(["-"]); //
+  const [selectedOptionNotes, setSelectedOptionsNotes] = useState(["-"]);
+  const [selectedOptionsOtherNotes, setSelectedOptionsOtherNotes] = useState(["-"])
+  const [selectedOptionsDate, setSelectedOptionsDate] = useState(["-"])
+  const [selectedOptionsCheckRule, setSelectedOptionsCheckRule] = useState(["-"]) //
+  const [selectedOptionsCheckOnTime, setSelectedOptionsCheckOnTime] = useState(["-"]) //
+  const [selectedOptionsCheckReport, setSelectedOptionsCheckReport] = useState(["-"]) //
+  const [selectedOptionsCheckDocument, setSelectedOptionsCheckDocument] = useState(["-"]) //
+  const [selectedOptionsCheckMessage, setSelectedOptionsCheckMessage] = useState(["-"]) //
+  const [selectedOptionsCheckResource, setSelectedOptionsCheckResource] = useState(["-"]) //
+  const [selectedOptionsCheckTarget, setSelectedOptionsCheckTarget] = useState (["-"]) //
+  const [selectedOptionsCheckRequisites, setSelectedOptionsCheckRequisites] = useState (["-"])
+  
 
-  const handleDropdownChangeTila = (event) => {
-    setSelectedOptionsTila([event.target.value]);
-  };
-
-  const handleDropdownChangeKampus = (event) => {
-    setSelectedOptionKampus(event.target.value);
-  };
-
-  const handleCheckboxChangeValinta1 = (event) => {
+  const handleChangeRequisites = (event) => {
     const option = event.target.value;
-    setSelectedOptionsValinta1((prevSelectedOptions) => {
+    setSelectedOptionsCheckRequisites((prevSelectedOptions) => {
       if (prevSelectedOptions.includes(option)) {
         return prevSelectedOptions.filter((selected) => selected !== option);
       } else {
@@ -120,98 +142,281 @@ const Page4 = () => {
     });
   };
 
-  const handleCheckboxChangeValinta2 = (event) => {
+  const handleChangeTarget = (event) => {
     const option = event.target.value;
-    setSelectedOptionsValinta2((prevSelectedOptions) => {
+    setSelectedOptionsCheckTarget((prevSelectedOptions) => {
       if (prevSelectedOptions.includes(option)) {
         return prevSelectedOptions.filter((selected) => selected !== option);
       } else {
         return [option];
       }
     });
+  };
+
+
+  const handleChangeResource = (event) => {
+    const option = event.target.value;
+    setSelectedOptionsCheckResource((prevSelectedOptions) => {
+      if (prevSelectedOptions.includes(option)) {
+        return prevSelectedOptions.filter((selected) => selected !== option);
+      } else {
+        return [option];
+      }
+    });
+  };
+
+
+  const handleChangeReport = (event) => {
+    const option = event.target.value;
+    setSelectedOptionsCheckReport((prevSelectedOptions) => {
+      if (prevSelectedOptions.includes(option)) {
+        return prevSelectedOptions.filter((selected) => selected !== option);
+      } else {
+        return [option];
+      }
+    });
+  };
+
+  const handleChangeMessage = (event) => {
+    const option = event.target.value;
+    setSelectedOptionsCheckMessage((prevSelectedOptions) => {
+      if (prevSelectedOptions.includes(option)) {
+        return prevSelectedOptions.filter((selected) => selected !== option);
+      } else {
+        return [option];
+      }
+    });
+  };
+
+
+  const handleChangeDocument = (event) => {
+    const option = event.target.value;
+    setSelectedOptionsCheckDocument((prevSelectedOptions) => {
+      if (prevSelectedOptions.includes(option)) {
+        return prevSelectedOptions.filter((selected) => selected !== option);
+      } else {
+        return [option];
+      }
+    });
+  };
+
+  const handleChangeOnTime = (event) => {
+    const option = event.target.value;
+    setSelectedOptionsCheckOnTime((prevSelectedOptions) => {
+      if (prevSelectedOptions.includes(option)) {
+        return prevSelectedOptions.filter((selected) => selected !== option);
+      } else {
+        return [option];
+      }
+    });
+  };
+
+  
+
+  const handleChangeCheckRule = (event) => {
+    const option = event.target.value;
+    setSelectedOptionsCheckRule((prevSelectedOptions) => {
+      if (prevSelectedOptions.includes(option)) {
+        return prevSelectedOptions.filter((selected) => selected !== option);
+      } else {
+        return [option];
+      }
+    });
+  };
+
+
+  
+
+ 
+
+  const handleCheckboxChangeResponsiblePerson = (event) => {
+    const option = event.target.value;
+    setSelectedOptionsResponsiblePerson((prevSelectedOptions) => {
+      if (prevSelectedOptions.includes(option)) {
+        return prevSelectedOptions.filter((selected) => selected !== option);
+      } else {
+        return [option];
+      }
+    });
+  };
+
+  const handleNotesChange = (event) => {
+    setSelectedOptionsNotes(event.target.value);
+  };
+
+  const handleDateChange = (event) => {
+    setSelectedOptionsDate(event.target.value);
+  };
+
+  const handleOtherNotesChange = (event) => {
+    setSelectedOptionsOtherNotes(event.target.value);
+  };
+  const handleKatselmoijaChange = (event) => {
+    setSelectedOptionsKatselmoija(event.target.value);
+  };
+
+
+
+
+
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+ 
+    
+    const images = await handleUpload();
+
+    console.log(images)
+    
+    const payload = {
+      selectedOptionsResponsiblePerson, 
+      selectedOptionNotes,
+      selectedOptionsOtherNotes,
+      selectedOptionsDate,
+      selectedOptionsCheckRule, 
+      selectedOptionsCheckMessage, 
+      selectedOptionsCheckDocument, 
+      selectedOptionsCheckReport, 
+      selectedOptionsCheckOnTime, 
+      selectedOptionsCheckResource, 
+      selectedOptionsCheckTarget, 
+      selectedOptionsCheckRequisites 
+    };
+    console.log(payload);
+    // Tässä lähetys supabasen tietokantaan
+
+     const { data, error } = await supabase
+      .from('Form').insert([{
+          group: selectedOptionkatselmointiryhma,
+          campus: selectedOptionKampus,
+          space: selectedOptionsTila,
+          condition: selectedOptionsResponsiblePerson,
+          notes: selectedOptionNotes,
+          images: images, // Tekee arraysa stringin: "kuva_abc.png,kuva_123.jpg"
+          other_notes: selectedOptionsOtherNotes,
+          date: selectedOptionsDate,
+        },
+      ])
+      .select() 
+
+    
+      navigate("/home")
+         
+      
   };
 
   return (
-    <div style={{ textAlign: 'center', marginTop: '50px' }}>
+    <div style={{ textAlign: "center", marginTop: "50px" }}>
       <Container>
         <FormBox>
-          <h2>Toimintamallin ja johtamisen katselmointi</h2>
-          <StyledForm>
+          <h2>Toimintamallin ja johtamisen katselmoinnit</h2>
+          <StyledForm onSubmit={handleSubmit}>
             <StyledLabel>
-              Katselmointiryhmä:
-              <StyledInput type="text" name="text" />
+              Katselmoija:
+              <StyledInput type="text" name="text"
+              onChange={handleKatselmoijaChange} />
             </StyledLabel>
 
             <p></p>
             <StyledLabel>
               Päivämäärä:
-              <StyledInput type="text" name="date" />
-              Katselmointi suoritetaan 1-4 kertaa kuussa
+              <StyledInput type="text" name="date"
+              onChange={handleDateChange} />
+              Katselmointi suoritetaan kerran vuodessa
             </StyledLabel>
 
-            <p></p>
-            <StyledLabel>
-              Kampus:
-              <StyledSelect value={selectedOptionKampus} onChange={handleDropdownChangeKampus}>
-                <option value="-">-</option>
-                <option value="LAY">Lapin yliopisto</option>
-                <option value="LAMK Rovaniemi">Lapin ammattikorkeakoulu</option>
-              </StyledSelect>
-              Valittu Kampus: {selectedOptionKampus}
-            </StyledLabel>
-
-            <p></p>
-            <StyledLabel>
-              Tila:
-              <StyledSelect value={selectedOptionsTila[0]} onChange={handleDropdownChangeTila}>
-                <option value="-">-</option>
-                <option value="A310">A310</option>
-                <option value="A311">A311</option>
-                <option value="A312">A312</option>
-                <option value="A313">A313</option>
-                <option value="A314">A314</option>
-                <option value="A315">A315</option>
-              </StyledSelect>
-              Valittu tila: {selectedOptionsTila.join(", ")}
-            </StyledLabel>
+  
             
-            <ShowImage></ShowImage>
-
-            Tallenna Kuva pilveen
-
-            <FileUploadComponent></FileUploadComponent>
 
             <p></p>
             <StyledLabel>
-            <CheckboxGroup
-              label="Yleisilme
-              Onko yleisilme siisti? Millä tasolla päivittäiskatselmointien tulokset on? Onko havaittuihin poikkeamiin reagoitu?"
-              options={['Edelläkävijä', 'Sitoutunut', 'Puutteellinen']}
-              selectedOptions={selectedOptionsValinta1}
-              handleCheckboxChange={handleCheckboxChangeValinta1}
-            />
+              <CheckboxGroup
+                label="onko vastuu henkilö nimetty?"
+                options={["Hyvä", "Tyydyttävä", "Huono"]}
+                selectedOptions={selectedOptionsResponsiblePerson}
+                handleCheckboxChange={handleCheckboxChangeResponsiblePerson}
+              />
+
+              <p></p>
+              <p></p>
+
+                <CheckboxGroup
+                label="Noudetetaanko annettuja ohjeita?"
+                options={["Puutteellinen", "Sitoutunut", "Edelläkävijä"]}
+                selectedOptions={selectedOptionsCheckRule}
+                handleCheckboxChange={handleChangeCheckRule}
+              />
+
+              <p></p>
+              <p></p>
+                <CheckboxGroup
+                label="Onko katselmointi ja raportti ajallaan vuosikellon mukaisesti?"
+                options={["Puutteellinen", "Sitoutunut", "Edelläkävijä"]}
+                selectedOptions={selectedOptionsCheckOnTime}
+                handleCheckboxChange={handleChangeOnTime}
+              />
+
+              <p></p>
+              <p></p>
+
+                <CheckboxGroup
+                label="onko 6s raportit säännöllisiä?"
+                options={["Puutteellinen", "Sitoutunut", "Edelläkävijä"]}
+                selectedOptions={selectedOptionsCheckReport}
+                handleCheckboxChange={handleChangeReport}
+              />
+                <p></p>
+                <p></p>
+                <CheckboxGroup
+                label="onko dokumenttipankki ajantasalla?"
+                options={["Puutteellinen", "Sitoutunut", "Edelläkävijä"]}
+                selectedOptions={selectedOptionsCheckDocument}
+                handleCheckboxChange={handleChangeDocument}
+              />
+              <p></p>
+              <p></p>
+               <CheckboxGroup
+                label="Onko viestintä suunnitelman mukaisesti?"
+                options={["Puutteellinen", "Sitoutunut", "Edelläkävijä"]}
+                selectedOptions={selectedOptionsCheckMessage}
+                handleCheckboxChange={handleChangeMessage}
+              />  
+              <p></p>
+              <p></p>
+              <CheckboxGroup
+                label="onko tavoitteet on tunnistettu?"
+                options={["Puutteellinen", "Sitoutunut", "Edelläkävijä"]}
+                selectedOptions={selectedOptionsCheckTarget}
+                handleCheckboxChange={handleChangeTarget}
+              />  
+
+              <p></p>
+              <p></p>
+              <CheckboxGroup
+                label="onko resursointi riittävä?"
+                options={["Puutteellinen", "Sitoutunut", "Edelläkävijä"]}
+                selectedOptions={selectedOptionsCheckResource}
+                handleCheckboxChange={handleChangeResource}
+              />  
+              <p></p>
+              <p></p>
+              <CheckboxGroup
+                label="onko periaatteet, tarpeet ja vaatimukset tunnistettu sekä kirjattu?"
+                options={["Puutteellinen", "Sitoutunut", "Edelläkävijä"]}
+                selectedOptions={selectedOptionsCheckRequisites}
+                handleCheckboxChange={handleChangeRequisites}
+              />
+              
+                
+
             </StyledLabel>
 
             <p></p>
             <p></p>
-            <StyledLabel>
-            <CheckboxGroup
-              label="Ohjeistukset
-              Onko ohjeistukset saatavilla ja ajantasaiset? Noudatetaanko annettuja ohjeita?"
-              options={['Edelläkävijä', 'Sitoutunut', 'Puutteellinen']}
-              selectedOptions={selectedOptionsValinta2}
-              handleCheckboxChange={handleCheckboxChangeValinta2}
-            />
-            </StyledLabel>
 
             <p></p>
 
-            <StyledLabel>
-              Muuta huomioita:
-              <StyledTextArea></StyledTextArea>
-              <p>Mitä positiivista olet huomannut tarkastusjaksolla:</p>
-              <StyledTextArea></StyledTextArea>
-            </StyledLabel>
+          
 
             <StyledButton type="submit">Submit</StyledButton>
           </StyledForm>
@@ -222,3 +427,4 @@ const Page4 = () => {
 };
 
 export default Page4;
+
