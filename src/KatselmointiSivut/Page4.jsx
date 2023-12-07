@@ -26,7 +26,8 @@ const FormBox = styled.div`
   border-radius: 8px;
   border: center;
   width: 300px; /* Adjust width as needed */
-  background-color: #55ff00;
+  background-color: #DFC5FE
+  ;
   
 `;
 

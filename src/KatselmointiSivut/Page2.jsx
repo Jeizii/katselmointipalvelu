@@ -18,6 +18,7 @@ const FormBox = styled.div`
   border: 20px solid #ccc;
   border-radius: 8px;
   width: 300px;
+  background-color: lightgreen;
 `;
 
 const StyledForm = styled.form`
@@ -155,7 +156,7 @@ const Page2 = () => {
             <StyledLabel>
               Päivämäärä:
               <StyledInput type="text" name="date" />
-              Katselmointi suoritetaan 1-4 kertaa kuussa
+              Katselmointi suoritetaan 1/2 kertaa vuodessa
             </StyledLabel>
 
             <p></p>
