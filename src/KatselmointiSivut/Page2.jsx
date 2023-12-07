@@ -28,6 +28,7 @@ const StyledForm = styled.form`
 
 const StyledLabel = styled.label`
   margin-bottom: 8px;
+  align-items: centet;
 `;
 
 const StyledInput = styled.input`
@@ -72,6 +73,8 @@ const StyledButton = styled.button`
   border-radius: 5px;
   cursor: pointer;
 `;
+
+
 
 
 const CheckboxGroup = ({ label, options, selectedOptions, handleCheckboxChange }) => {
