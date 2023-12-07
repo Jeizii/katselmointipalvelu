@@ -7,7 +7,7 @@ import ShowImage from '../components/ShowImage';
 import { useState } from "react";
 import styled from 'styled-components';
 import { supabase } from "../services/supabase";
-
+import { useNavigate } from 'react-router-dom';
 
 const Container = styled.div`
   display: grid;
@@ -133,6 +133,8 @@ const Page3 = () => {
   const [selectedOptionsCheckExplosive, setSelectedOptionsCheckExplosive] = useState (["-"])
   const [selectedOptionsCheckSafetyFind, setSelectedOptionsCheckSafetyFind] = useState (["-"])
 
+  
+  const navigateTo = useNavigate();
 
   const handleChangeSafetyFind = (event) => {
     const option = event.target.value;
@@ -335,7 +337,7 @@ const Page3 = () => {
     // Tässä lähetys supabasen tietokantaan
 
      const { data, error } = await supabase
-      .from('Form').insert([{
+      .from('turvallisuuskatselmointi').insert([{
           group: selectedOptionkatselmointiryhma,
           campus: selectedOptionKampus,
           space: selectedOptionsTila,
@@ -344,6 +346,17 @@ const Page3 = () => {
           images: images, // Tekee arraysa stringin: "kuva_abc.png,kuva_123.jpg"
           other_notes: selectedOptionsOtherNotes,
           date: selectedOptionsDate,
+          checkChemical: selectedOptionsCheckChemical,
+          checkRisk: selectedOptionsCheckRisk,
+          checkGear: selectedOptionsCheckGear,
+          checkRad: selectedOptionsCheckRad,
+          checkSafety: selectedOptionsCheckSafety,
+          checkEmergency: selectedOptionsCheckEmergency,
+          checkSafetyFind: selectedOptionsCheckSafetyFind,
+          checkExplosive: selectedOptionsCheckExplosive,
+          
+          testi: payload
+
         },
       ])
       .select() 
@@ -351,7 +364,7 @@ const Page3 = () => {
       
       // Voidaan navigoida esim. sivulle jossa tehtyä katselmointia voidaan tarkastella 
       // id:n perusteella
-      navigate("/home")
+      navigateTo('/GoodbyePage')
       
       /* 
       
@@ -505,7 +518,9 @@ const Page3 = () => {
                   type="text"
                   name="text"
                   onChange={handleOtherNotesChange}
-              />
+              /><p>Laita Kuva mikäli tarve</p>
+              <ShowImage></ShowImage>
+                <p> Liitä kuva raporttiin</p>
               <FileUploadComponent
                 setFilesUploaded={setFilesUploaded}
               ></FileUploadComponent>
