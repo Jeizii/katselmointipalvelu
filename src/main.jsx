@@ -9,7 +9,7 @@ import Page3 from './KatselmointiSivut/Page3.jsx'
 import Page4 from './KatselmointiSivut/Page4.jsx'
 import GoodbyePage from './GoodbyePage.jsx'
 import Testisivu from './KatselmointiSivut/Testisivu.jsx'
-import HyvRap from './RaporttiSivut/HyvRaportit.jsx'
+
 import TarRap,{loader as raporttiLoader} from './RaporttiSivut/TarRaportit.jsx'
 import TurRap from './RaporttiSivut/TurRaportit.jsx'
 import MainPageStudent from './MainPageStudent.jsx'
@@ -44,10 +44,7 @@ const router = createBrowserRouter([
         path:"/GoodbyePage",
         element: <GoodbyePage></GoodbyePage>
       },
-      {
-        path:"/hyv_raportit",
-        element: <HyvRap></HyvRap>
-      },
+
       {
         path:"/Testisivu",
         element: <Testisivu></Testisivu>

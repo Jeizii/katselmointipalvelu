@@ -10,7 +10,7 @@ export async function loader({params}){
  
   if (approved){
   const { data, error } = await supabase.from(params.table).select(`*`).not("approvedAt", "is", null).order('created_at', {ascending: false});
-    headerState = "Hyväksytyt raportit";
+    headerState = "Raportit";
 
   return {data,approved,headerState}
   }

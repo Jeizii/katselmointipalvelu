@@ -50,7 +50,7 @@ export default function ContinousAudit({children}){
               <StyledSelect
                 name="campus"
               >
-                <option value="LAY">Lapin yliopisto</option>
+              
                 <option value="LAMK Rovaniemi">Lapin ammattikorkeakoulu</option>
               </StyledSelect>
               {/* Valittu Kampus: {selectedOptionKampus} */}
@@ -63,12 +63,15 @@ export default function ContinousAudit({children}){
               name="space"
               >
                 <option value="-">-</option>
-                <option value="A310">A310</option>
-                <option value="A311">A311</option>
-                <option value="A312">A312</option>
-                <option value="A313">A313</option>
-                <option value="A314">A314</option>
-                <option value="A315">A315</option>
+                <option value="016">016</option>
+                <option value="A102">A102</option>
+                <option value="A106">A106</option>
+                <option value="A111">A111</option>
+                <option value="A111A">A111A</option>
+                <option value="A111B">A111B</option>
+                <option value="A111C">A1111</option>
+            
+
               </StyledSelect>
             {/*Valittu tila: {selectedOptionsTila.join(", ")} */}
             </StyledLabel>
