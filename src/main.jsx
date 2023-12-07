@@ -11,6 +11,9 @@ import GoodbyePage from './GoodbyePage.jsx'
 import Testisivu from './KatselmointiSivut/Testisivu.jsx'
 import HyvRap from './RaporttiSivut/HyvRaportit.jsx'
 import TarRap,{loader as raporttiLoader} from './RaporttiSivut/TarRaportit.jsx'
+import TurRap from './RaporttiSivut/TurRaportit.jsx'
+import MainPageStudent from './MainPageStudent.jsx'
+
 const router = createBrowserRouter([
 
   {
@@ -54,6 +57,16 @@ const router = createBrowserRouter([
         element: <TarRap></TarRap>,
         loader: raporttiLoader
       },
+      {
+        path:"/tur_raportit/:table/:approved",
+        element: <TurRap></TurRap>,
+        loader: raporttiLoader
+      },
+      {
+        path:"/MainPageStudent",
+        element: <MainPageStudent></MainPageStudent>
+      }
+      ,
     ]
   },
 

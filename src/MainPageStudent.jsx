@@ -17,7 +17,7 @@ const ExternalLink = styled.a`
   position: relative;
 `;
 
-const MainPage = () => {
+const MainPageStudent = () => {
   return (
     <body>
       <div style={{ textAlign: 'center', marginTop: '50px' }}>
@@ -29,23 +29,11 @@ const MainPage = () => {
         </ExternalLink>
 <p></p>
          {/* Internal Links */}
-         <StyledLink to='/tar_raportit/Form/approved' className='btn'>
-          Hyväksytyt Raportit
-        </StyledLink>
+        
         <StyledLink to='/tar_raportit/Form/notapproved' className='btn'>
           Tarkistettavat raportit
         </StyledLink>
-
-        <StyledLink to='/tur_raportit/turvallisuuskatselmointi/notapproved' className='btn'>
-          Turvallisuuskatselmoinnit
-        </StyledLink>
-
-        <StyledLink to='/tur_raportit/turvallisuuskatselmointi/approved' className='btn'>
-          Turvallisuuskatselmoinnit Hyväksytyt
-        </StyledLink>
         
-
-
         <h3></h3>
         <h3></h3>
       </div>
@@ -53,4 +41,4 @@ const MainPage = () => {
   );
 };
 
-export default MainPage;
+export default MainPageStudent;
