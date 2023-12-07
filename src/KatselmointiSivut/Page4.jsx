@@ -6,7 +6,7 @@ import Supabaseinit from '../components/SupabaseClient';
 import { useState } from "react";
 import styled from 'styled-components';
 import { supabase } from "../services/supabase";
-
+import { useNavigate } from 'react-router-dom';
 
 const Container = styled.div`
   display: grid;
@@ -118,19 +118,19 @@ const CheckboxGroup = ({
 };
 
 const Page4 = () => {
-  const [selectedOptionsResponsiblePerson, setSelectedOptionsResponsiblePerson] = useState(["-"]); //
-  const [selectedOptionNotes, setSelectedOptionsNotes] = useState(["-"]);
-  const [selectedOptionsOtherNotes, setSelectedOptionsOtherNotes] = useState(["-"])
+  const [selectedOptionkatselmointiryhma, setSelectedOptionsKatselmoija] = useState(["-"])
+  const [selectedOptionsResponsiblePerson, setSelectedOptionsResponsiblePerson] = useState(["-"]); 
   const [selectedOptionsDate, setSelectedOptionsDate] = useState(["-"])
-  const [selectedOptionsCheckRule, setSelectedOptionsCheckRule] = useState(["-"]) //
-  const [selectedOptionsCheckOnTime, setSelectedOptionsCheckOnTime] = useState(["-"]) //
-  const [selectedOptionsCheckReport, setSelectedOptionsCheckReport] = useState(["-"]) //
-  const [selectedOptionsCheckDocument, setSelectedOptionsCheckDocument] = useState(["-"]) //
-  const [selectedOptionsCheckMessage, setSelectedOptionsCheckMessage] = useState(["-"]) //
-  const [selectedOptionsCheckResource, setSelectedOptionsCheckResource] = useState(["-"]) //
-  const [selectedOptionsCheckTarget, setSelectedOptionsCheckTarget] = useState (["-"]) //
+  const [selectedOptionsCheckRule, setSelectedOptionsCheckRule] = useState(["-"]) 
+  const [selectedOptionsCheckOnTime, setSelectedOptionsCheckOnTime] = useState(["-"]) 
+  const [selectedOptionsCheckReport, setSelectedOptionsCheckReport] = useState(["-"]) 
+  const [selectedOptionsCheckDocument, setSelectedOptionsCheckDocument] = useState(["-"]) 
+  const [selectedOptionsCheckMessage, setSelectedOptionsCheckMessage] = useState(["-"]) 
+  const [selectedOptionsCheckResource, setSelectedOptionsCheckResource] = useState(["-"]) 
+  const [selectedOptionsCheckTarget, setSelectedOptionsCheckTarget] = useState (["-"]) 
   const [selectedOptionsCheckRequisites, setSelectedOptionsCheckRequisites] = useState (["-"])
   
+  const navigateTo = useNavigate();
 
   const handleChangeRequisites = (event) => {
     const option = event.target.value;
@@ -241,17 +241,15 @@ const Page4 = () => {
     });
   };
 
-  const handleNotesChange = (event) => {
-    setSelectedOptionsNotes(event.target.value);
-  };
+  
+
 
   const handleDateChange = (event) => {
     setSelectedOptionsDate(event.target.value);
   };
 
-  const handleOtherNotesChange = (event) => {
-    setSelectedOptionsOtherNotes(event.target.value);
-  };
+  
+
   const handleKatselmoijaChange = (event) => {
     setSelectedOptionsKatselmoija(event.target.value);
   };
@@ -265,14 +263,9 @@ const Page4 = () => {
     event.preventDefault();
  
     
-    const images = await handleUpload();
-
-    console.log(images)
-    
     const payload = {
+      
       selectedOptionsResponsiblePerson, 
-      selectedOptionNotes,
-      selectedOptionsOtherNotes,
       selectedOptionsDate,
       selectedOptionsCheckRule, 
       selectedOptionsCheckMessage, 
@@ -287,21 +280,25 @@ const Page4 = () => {
     // Tässä lähetys supabasen tietokantaan
 
      const { data, error } = await supabase
-      .from('Form').insert([{
-          group: selectedOptionkatselmointiryhma,
-          campus: selectedOptionKampus,
-          space: selectedOptionsTila,
-          condition: selectedOptionsResponsiblePerson,
-          notes: selectedOptionNotes,
-          images: images, // Tekee arraysa stringin: "kuva_abc.png,kuva_123.jpg"
-          other_notes: selectedOptionsOtherNotes,
-          date: selectedOptionsDate,
+      .from('Toimintamallinkatselmointi').insert([{
+        checkResponsiblePerson: selectedOptionsResponsiblePerson, 
+        checkDate: selectedOptionsDate,
+        checkReport: selectedOptionsCheckRule,
+        checkRule: selectedOptionsCheckRule, 
+        checkMessage: selectedOptionsCheckMessage, 
+        CheckDocument: selectedOptionsCheckDocument, 
+        checkReport: selectedOptionsCheckReport, 
+        checkOnTime: selectedOptionsCheckOnTime, 
+        checkResource: selectedOptionsCheckResource, 
+        checkTarget: selectedOptionsCheckTarget, 
+        checkRequisites: selectedOptionsCheckRequisites 
+     
         },
       ])
       .select() 
 
     
-      navigate("/home")
+      navigateTo('/GoodbyePage')
          
       
   };
