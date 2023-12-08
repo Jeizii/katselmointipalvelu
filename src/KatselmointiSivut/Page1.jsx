@@ -20,6 +20,7 @@ const FormBox = styled.div`
   border: 20px solid #ccc;
   border-radius: 8px;
   width: 300px;
+  background-color: #FFD580;
 `;
 
 const StyledForm = styled.form`
@@ -242,7 +243,7 @@ const Page1 = () => {
           <h2>Jatkuva katselmointi</h2>
           <StyledForm onSubmit={handleSubmit}>
             <StyledLabel>
-              Katselmointiryhmä:
+              Katselmoija:
               <StyledInput type="text" name="text"
               onChange={handleKatselmointiryhmaChange} />
             </StyledLabel>

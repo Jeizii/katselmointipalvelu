@@ -388,7 +388,7 @@ const Page3 = () => {
           <h2>Turvallisuuskatselmointi</h2>
           <StyledForm onSubmit={handleSubmit}>
             <StyledLabel>
-              Katselmointiryhmä:
+              Katselmoija:
               <StyledInput type="text" name="text"
               onChange={handleKatselmointiryhmaChange} />
             </StyledLabel>
