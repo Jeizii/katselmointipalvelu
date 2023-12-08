@@ -47,7 +47,7 @@ const TurRap = () => {
 "campus":"Rovaniemi","space":"B321","condition":"Hyvä","notes":"Kaikki ok","images":"",
 "other_notes":"","date":null,"turvallisuuskatselmointi":null,"testi":null} */}
 
-<Table head={{"created_at":"Päivämäärä" ,"group":"Katselmointiryhmä","campus":"Kampus", "space":"Huone", "condition":"Tilan kunto", "notes":"Huomioita","other_notes":"Muita huomioita", "date":"Päivämäärä", "checkSafety":"Turvallisuusohjeistukset", "checkRisk":"Toiminnan riskiarviointi", "checkGear":"Suojavarusteet", "checkEmergency": "Ensiapu- ja hätätoimet", "checkChemical":"Kemikaali käsittely", "checkExplosive":"Räjähdys-suojaarviointi", "checkRad":"Säteilyturvallisuus-arviointi", "checkSafetyFind": "Turvallisuuhavainnot"}} body={audits} onRowClicked={handleRowClick}>
+<Table head={{"created_at":"Päivämäärä" ,"group":"Katselmointiryhmä","campus":"Kampus", "space":"Huone", "condition":"Tilan kunto", "notes":"Huomioita","other_notes":"Muita huomioita", "checkSafety":"Turvallisuusohjeistukset", "checkRisk":"Toiminnan riskiarviointi", "checkGear":"Suojavarusteet", "checkEmergency": "Ensiapu- ja hätätoimet", "checkChemical":"Kemikaali käsittely", "checkExplosive":"Räjähdys-suojaarviointi", "checkRad":"Säteilyturvallisuus-arviointi", "checkSafetyFind": "Turvallisuuhavainnot"}} body={audits} onRowClicked={handleRowClick}>
 
 </Table>
 
