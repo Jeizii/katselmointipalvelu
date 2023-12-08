@@ -12,6 +12,7 @@ import Testisivu from './KatselmointiSivut/Testisivu.jsx'
 
 import TarRap,{loader as raporttiLoader} from './RaporttiSivut/TarRaportit.jsx'
 import TurRap from './RaporttiSivut/TurRaportit.jsx'
+import LukRap from './RaporttiSivut/LukRaportit.jsx'
 import MainPageStudent from './MainPageStudent.jsx'
 
 const router = createBrowserRouter([
@@ -57,6 +58,11 @@ const router = createBrowserRouter([
       {
         path:"/tur_raportit/:table/:approved",
         element: <TurRap></TurRap>,
+        loader: raporttiLoader
+      },
+      {
+        path:"/luk_raportit/:table/:approved",
+        element: <LukRap></LukRap>,
         loader: raporttiLoader
       },
       {

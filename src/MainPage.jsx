@@ -43,9 +43,15 @@ const MainPage = () => {
         <StyledLink to='/tur_raportit/turvallisuuskatselmointi/approved' className='btn'>
           Turvallisuuskatselmoinnit Hyväksytyt
         </StyledLink>
+
+        <StyledLink to='/luk_raportit/vuosikausikatselmointi/approved' className='btn'>
+          Hyväksytyt Lukuvuosi Raportit
+        </StyledLink>
+
+        <StyledLink to='/luk_raportit/vuosikausikatselmointi/notapproved' className='btn'>
+          Tarkistettavat Lukuvuosi raportit
+        </StyledLink>
         
-
-
         <h3></h3>
         <h3></h3>
       </div>
