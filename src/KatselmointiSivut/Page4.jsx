@@ -287,7 +287,6 @@ const Page4 = () => {
         checkRule: selectedOptionsCheckRule, 
         checkMessage: selectedOptionsCheckMessage, 
         CheckDocument: selectedOptionsCheckDocument, 
-        checkReport: selectedOptionsCheckReport, 
         checkOnTime: selectedOptionsCheckOnTime, 
         checkResource: selectedOptionsCheckResource, 
         checkTarget: selectedOptionsCheckTarget, 
